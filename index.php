@@ -26,7 +26,8 @@
 </head>
 <body>
   <div align="center">
-    <h1>Congratulations2!</h1>
+    <?php $user_id = 45; ?>
+    <h1>Congratulations, <?= $user_id ?>!</h1>
     <h2>You have successfully created a pipeline that retrieved this source application from an Amazon S3 bucket and deployed it
 	to three Amazon EC2 instances using AWS CodeDeploy.</h2>
     <p>For next steps, read the AWS CodePipeline Documentation.</p>
