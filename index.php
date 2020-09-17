@@ -1,3 +1,34 @@
+<?php
+  ini_set('display_errors', 1);
+  error_reporting(E_ALL);
+  require __DIR__ . '/vendor/autoload.php';
+
+  $db_hostname = getenv('DB_HOSTNAME');
+  $db_name = getenv('DB_NAME');
+  $db_user = getenv('DB_USER');
+  $db_password = getenv('DB_PASSWORD');
+
+  $pdo = new PDO("mysql:dbname=$db_name;host=$db_hostname;charset=utf8mb4", $db_user, $db_password);
+  $db = \Delight\Db\PdoDatabase::fromPdo($pdo);
+
+  $rows = $db->select('SELECT * FROM test');
+  if(!empty($rows))
+  {
+    $db->insert('test',[
+      'firstname' => 'Shirockov',
+      'middlename' => 'Igorevich',
+      'lastname' => 'Igor'
+    ]);
+  }
+
+  $row = $db->selectRow('SELECT * FROM test WHERE lastname = "Igor"');
+
+  $name = $row['firstname'] ?? 'no';
+  $family = $row['lastname'] ?? 'no';
+  $middlename = $row['middlename'] ?? 'no';
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +57,8 @@
 </head>
 <body>
   <div align="center">
-    <?php $user_id = 45; ?>
-    <h1>Congratulations, <?= $user_id ?>!</h1>
+    <h1>Congratulations!</h1>
+    <h2>You is <?= $family ?> <?= $name ?> <?= $middlename ?></h2>
     <h2>You have successfully created a pipeline that retrieved this source application from an Amazon S3 bucket and deployed it
 	to three Amazon EC2 instances using AWS CodeDeploy.</h2>
     <p>For next steps, read the AWS CodePipeline Documentation.</p>

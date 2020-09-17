@@ -1,0 +1,12 @@
+{
+    "name": "research/aws",
+    "authors": [
+        {
+            "name": "Shirockov Igor",
+            "email": "igor.shirockov@rosberry.com"
+        }
+    ],
+    "require": {
+        "delight-im/db": "^1.3"
+    }
+}
