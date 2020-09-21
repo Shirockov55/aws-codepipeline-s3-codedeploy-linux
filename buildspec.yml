@@ -31,7 +31,6 @@ phases:
       # - command
   build:
     commands:
-      - yum install -y httpd
       - composer install
   #post_build:
     #commands:
