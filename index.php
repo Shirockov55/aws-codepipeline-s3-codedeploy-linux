@@ -11,17 +11,33 @@
   $pdo = new PDO("mysql:dbname=$db_name;host=$db_hostname;charset=utf8mb4", $db_user, $db_password);
   $db = \Delight\Db\PdoDatabase::fromPdo($pdo);
 
-  $rows = $db->select('SELECT * FROM test');
-  if(!empty($rows))
+  $isset_table = $db->exec('SHOW TABLES LIKE "test"');
+
+  if($isset_table)
+  {
+    $db->exec('DROP TABLE `test`');
+  }
+
+  $db->exec('CREATE TABLE `test` (
+    id INT(10) NOT NULL AUTO_INCREMENT,
+    firstname VARCHAR(35),
+    middlename VARCHAR(50),
+    lastname VARCHAR(50) default "bato",
+    CONSTRAINT id_pk PRIMARY KEY (id)
+  )');
+
+  $row = $db->selectRow('SELECT * FROM test WHERE lastname = "Igor"');
+
+  if(empty($row))
   {
     $db->insert('test',[
       'firstname' => 'Shirockov',
       'middlename' => 'Igorevich',
       'lastname' => 'Igor'
     ]);
-  }
 
-  $row = $db->selectRow('SELECT * FROM test WHERE lastname = "Igor"');
+    $row = $db->selectRow('SELECT * FROM test WHERE lastname = "Igor"');
+  }
 
   $name = $row['firstname'] ?? 'no';
   $family = $row['lastname'] ?? 'no';
