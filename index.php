@@ -31,7 +31,7 @@
   if(empty($row))
   {
     $db->insert('test',[
-      'firstname' => 'Shirockov',
+      'firstname' => 'Shirockov Dev',
       'middlename' => 'Igorevich',
       'lastname' => 'Igor'
     ]);
@@ -73,7 +73,7 @@
 </head>
 <body>
   <div align="center">
-    <h1>Congratulations!</h1>
+    <h1>Congratulations! Dev!</h1>
     <h2>You is <?= $family ?> <?= $name ?> <?= $middlename ?></h2>
     <h2>You have successfully created a pipeline that retrieved this source application from an Amazon S3 bucket and deployed it
 	to three Amazon EC2 instances using AWS CodeDeploy.</h2>
